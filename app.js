@@ -1,6 +1,32 @@
 // template_tyr5yle
 // service_0pmuhwz
 // _koKHD575eyOppOT-
+let isModalOpen = false
+let contrastToggle = false
+const scaleFactor = 1/20
+
+function moveBackground(event) {
+    const shapes = document.querySelectorAll(".shape");
+    const x = event.clientX * scaleFactor;
+    const y = event.clientY * scaleFactor;
+  
+    for (let i = 0; i < shapes.length; ++i) {
+      const isOdd = i % 2 !== 0;
+      const boolInt = isOdd ? -1 : 1;
+     
+      shapes[i].style.transform = `translate(${x * boolInt}px, ${y * boolInt}px) rotate(${x * boolInt * 10}deg)`
+    }
+}
+
+function toggleContrast() {
+    contrastToggle = !contrastToggle;
+    if (contrastToggle) {
+      document.body.classList += " dark-theme"
+    }
+    else {
+      document.body.classList.remove("dark-theme")
+    }
+}
 
 function contact(event){
     event.preventDefault()
@@ -8,7 +34,7 @@ function contact(event){
     const success = document.querySelector('.modal__overlay--success')
     loading.classList += " modal__overlay--visible"
     emailjs
-    .sendfomr(
+    .sendForm(
         'service_0pmuhwz',
         'template_tyr5yle', 
         event.target,
